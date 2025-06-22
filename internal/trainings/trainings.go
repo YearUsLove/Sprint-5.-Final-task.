@@ -30,6 +30,9 @@ func (t *Training) Parse(datastring string) (err error) {
 	if err != nil {
 		return errors.New("ошибка преобразования количества шагов")
 	}
+	if steps <= 0 {
+		return errors.New("количество шагов должно быть положительным числом")
+	}
 
 	t.Steps = steps
 	t.TrainingType = slice[1]
@@ -37,6 +40,9 @@ func (t *Training) Parse(datastring string) (err error) {
 	duration, err := time.ParseDuration(slice[2])
 	if err != nil {
 		return errors.New("ошибка преобразования продолжительности")
+	}
+	if duration <= 0 {
+		return errors.New("продолжительность должна быть положительной")
 	}
 
 	t.Duration = duration
