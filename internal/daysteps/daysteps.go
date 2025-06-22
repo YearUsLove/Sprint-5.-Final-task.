@@ -30,12 +30,18 @@ func (ds *DaySteps) Parse(datastring string) (err error) {
 	if err != nil {
 		return errors.New("ошибка преобразования количества шагов")
 	}
+	if steps <= 0 {
+		return errors.New("количество шагов должно быть положительным числом")
+	}
 
 	ds.Steps = steps
 
 	duration, err := time.ParseDuration(parts[1])
 	if err != nil {
 		return errors.New("ошибка преобразования продолжительности")
+	}
+	if duration <= 0 {
+		return errors.New("продолжительность должна быть положительной")
 	}
 
 	ds.Duration = duration
